@@ -73,7 +73,7 @@ const presets = {
     'ribbon-3': '#A0522D'
   },
   ornate: {
-    'outer-leather': '#4B0082',
+    'outer-leather': '#563159',
     'inner-leather': '#FFFFF0',
     'guilding': '#DAA520',
     'ribbon-1': '#DC143C',
@@ -91,11 +91,11 @@ function App() {
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [selectedColorItem, setSelectedColorItem] = useState(null)
   const [colors, setColors] = useState({
-    'outer-leather': '#722F37',
+    'outer-leather': '#5B2831',
     'inner-leather': '#d2b48c',
     'guilding': '#ffd700',
     'ribbon-1': '#2D5A3A',
-    'ribbon-2': '#FFFFF0',
+    'ribbon-2': '#FAEBD7',
     'ribbon-3': '#1B4B82'
   })
 
@@ -133,52 +133,95 @@ function App() {
   ]
 
   const SidebarContent = () => (
-    <Box sx={{ width: { xs: 250, sm: 180 }, p: 1 }}>
-      <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem' }}>
+    <Box sx={{ 
+      width: { xs: 250, sm: 180 }, 
+      p: 2,
+      backgroundColor: '#f5f5f5',
+      height: '100%',
+      borderRight: '1px solid rgba(0, 0, 0, 0.15)',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+    }}>
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          mb: 3, 
+          fontSize: '1.2rem',
+          fontWeight: 700,
+          color: '#1a1a1a',
+          textAlign: 'center',
+          width: '100%',
+          letterSpacing: '0.5px'
+        }}
+      >
         Customization
       </Typography>
-      <List>
+      <List sx={{ mb: 3 }}>
         {components.map((component) => (
           <ListItem
             key={component.id}
             button
             dense
             onClick={() => handleColorClick(component.id)}
-            sx={{ py: 0.5 }}
+            sx={{
+              py: 1.2,
+              borderRadius: 1.5,
+              mb: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.7)',
+              transition: 'all 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                transform: 'translateX(4px)',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+              }
+            }}
           >
-            <ListItemIcon sx={{ minWidth: 32 }}>{component.icon}</ListItemIcon>
+            <ListItemIcon sx={{ 
+              minWidth: 36,
+              color: colors[component.id],
+              '& svg': {
+                stroke: 'rgba(0, 0, 0, 0.2)',
+                strokeWidth: '0.5px'
+              }
+            }}>
+              {component.icon}
+            </ListItemIcon>
             <ListItemText 
               primary={component.name} 
-              sx={{ '& .MuiTypography-root': { fontSize: '0.9rem' } }} 
-            />
-            <Box
-              sx={{
-                width: 24,
-                height: 24,
-                borderRadius: '50%',
-                backgroundColor: colors[component.id],
-                ml: 1,
-                border: '1px solid rgba(0, 0, 0, 0.12)'
-              }}
+              sx={{ 
+                '& .MuiTypography-root': { 
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  color: '#333333',
+                  letterSpacing: '0.3px'
+                } 
+              }} 
             />
           </ListItem>
         ))}
       </List>
-      <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 1.5,
+        px: 1
+      }}>
         <select 
           onChange={(e) => setColors(presets[e.target.value])} 
           style={{ 
-            width: '90%', 
-            padding: '0.6em 1.2em',
+            width: '100%', 
+            padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid transparent',
-            fontSize: '1em',
-            fontWeight: '500',
+            border: '1px solid rgba(0, 0, 0, 0.2)',
+            fontSize: '0.9em',
+            fontWeight: '600',
             fontFamily: 'inherit',
-            backgroundColor: '#e0e0e0',
+            backgroundColor: '#ffffff',
             cursor: 'pointer',
-            color: '#000000',
-            transition: 'border-color 0.25s'
+            color: '#1a1a1a',
+            transition: 'all 0.2s ease-in-out',
+            outline: 'none',
+            textAlign: 'center',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
           }}
         >
           <option value="" disabled selected>Presets</option>
@@ -190,17 +233,23 @@ function App() {
         <button 
           onClick={handleRandomizeColors} 
           style={{ 
-            width: '90%',
-            padding: '0.6em 1.2em',
+            width: '100%',
+            padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid transparent',
-            fontSize: '1em',
+            border: '1px solid rgba(0, 0, 0, 0.15)',
+            fontSize: '0.9em',
             fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#e0e0e0',
+            backgroundColor: '#4a90e2',
             cursor: 'pointer',
-            color: '#000000',
-            transition: 'border-color 0.25s'
+            color: '#ffffff',
+            transition: 'all 0.2s ease-in-out',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            '&:hover': {
+              backgroundColor: '#d4d4d4',
+              transform: 'translateY(-1px)',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            }
           }}
         >
           Randomize Colors
@@ -210,7 +259,7 @@ function App() {
   );
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ height: '100vh', display: 'flex' }}>
+    <Container maxWidth={false} disableGutters sx={{ height: '100vh', width: '100vw', display: 'flex', color: '#000000', overflow: 'hidden' }}>
       {isMobile && (
         <IconButton
           color="inherit"
@@ -238,7 +287,12 @@ function App() {
           borderRadius: 0, 
           borderRight: 1, 
           borderColor: 'divider',
-          display: drawerOpen ? 'block' : 'none'
+          display: drawerOpen ? 'block' : 'none',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          zIndex: 1200
         }}>
           <SidebarContent />
         </Paper>
@@ -250,14 +304,16 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        p: { xs: 1, sm: 2 },
-        ml: { xs: 0, sm: drawerOpen ? '180px' : 0 }
+        width: '100%',
+        p: { xs: 0, sm: 1 },
+        ml: { xs: 0, sm: drawerOpen ? '180px' : 0 },
+        transition: 'margin-left 0.3s ease-in-out'
       }}>
         <Box sx={{
           width: '100%',
           height: '100%',
-          maxWidth: { xs: '100%', sm: 900 },
-          maxHeight: { xs: '100%', sm: 900 }
+          maxWidth: '100%',
+          maxHeight: '100%'
         }}>
           <BibleModel colors={colors} />
         </Box>
@@ -266,7 +322,11 @@ function App() {
         open={colorPickerOpen}
         onClose={() => setColorPickerOpen(false)}
         PaperProps={{
-          sx: { p: 2 }
+          sx: { 
+            p: 3,
+            borderRadius: 2,
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)'
+          }
         }}
       >
         <ChromePicker

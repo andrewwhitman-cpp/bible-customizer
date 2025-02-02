@@ -91,7 +91,7 @@ function App() {
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
   const [selectedColorItem, setSelectedColorItem] = useState(null)
   const [colors, setColors] = useState({
-    'outer-leather': '#722F37',
+    'outer-leather': '#5B2831',
     'inner-leather': '#d2b48c',
     'guilding': '#ffd700',
     'ribbon-1': '#2D5A3A',

@@ -178,7 +178,8 @@ function App() {
             backgroundColor: '#e0e0e0',
             cursor: 'pointer',
             color: '#000000',
-            transition: 'border-color 0.25s'
+            transition: 'border-color 0.25s',
+            textAlign: 'center'
           }}
         >
           <option value="" disabled selected>Presets</option>

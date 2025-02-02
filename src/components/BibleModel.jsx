@@ -8,7 +8,7 @@ const BibleModel = ({ colors }) => {
   const bibleRef = useRef();
 
   return (
-    <Canvas shadows={false} dpr={[1, 2]} camera={{ position: [4, 2, 4], fov: 50 }} style={{ background: '#ffffff' }}>
+    <Canvas shadows={false} dpr={[1, 2]} camera={{ position: [4, 2, 4], fov: 50 }} style={{ background: '#f8f8f8', width: '100%', height: '100%' }}>
       <Stage environment="city" intensity={0.8} preset="rembrandt" shadows={false}>
         <group ref={bibleRef}>
           {/* Book block (pages) */}

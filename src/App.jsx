@@ -73,7 +73,7 @@ const presets = {
     'ribbon-3': '#A0522D'
   },
   ornate: {
-    'outer-leather': '#4B0082',
+    'outer-leather': '#563159',
     'inner-leather': '#FFFFF0',
     'guilding': '#DAA520',
     'ribbon-1': '#DC143C',

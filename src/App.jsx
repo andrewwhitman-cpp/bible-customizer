@@ -173,7 +173,11 @@ function App() {
           >
             <ListItemIcon sx={{ 
               minWidth: 36,
-              color: colors[component.id]
+              color: colors[component.id],
+              '& svg': {
+                stroke: 'rgba(0, 0, 0, 0.2)',
+                strokeWidth: '0.5px'
+              }
             }}>
               {component.icon}
             </ListItemIcon>

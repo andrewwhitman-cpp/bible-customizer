@@ -133,52 +133,99 @@ function App() {
   ]
 
   const SidebarContent = () => (
-    <Box sx={{ width: { xs: 250, sm: 180 }, p: 1 }}>
-      <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem' }}>
+    <Box sx={{ 
+      width: { xs: 250, sm: 180 }, 
+      p: 2,
+      backgroundColor: '#ffffff',
+      height: '100%',
+      borderRight: '1px solid rgba(0, 0, 0, 0.08)'
+    }}>
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          mb: 2, 
+          fontSize: '1.1rem',
+          fontWeight: 600,
+          color: '#1a1a1a',
+          textAlign: 'center',
+          width: '100%'
+        }}
+      >
         Customization
       </Typography>
-      <List>
+      <List sx={{ mb: 3 }}>
         {components.map((component) => (
           <ListItem
             key={component.id}
             button
             dense
             onClick={() => handleColorClick(component.id)}
-            sx={{ py: 0.5 }}
+            sx={{
+              py: 1,
+              borderRadius: 1,
+              mb: 0.5,
+              transition: 'all 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                transform: 'translateX(4px)'
+              }
+            }}
           >
-            <ListItemIcon sx={{ minWidth: 32 }}>{component.icon}</ListItemIcon>
+            <ListItemIcon sx={{ 
+              minWidth: 36,
+              color: colors[component.id]
+            }}>
+              {component.icon}
+            </ListItemIcon>
             <ListItemText 
               primary={component.name} 
-              sx={{ '& .MuiTypography-root': { fontSize: '0.9rem' } }} 
+              sx={{ 
+                '& .MuiTypography-root': { 
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  color: '#2c2c2c'
+                } 
+              }} 
             />
             <Box
               sx={{
-                width: 24,
-                height: 24,
+                width: 28,
+                height: 28,
                 borderRadius: '50%',
                 backgroundColor: colors[component.id],
                 ml: 1,
-                border: '1px solid rgba(0, 0, 0, 0.12)'
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                transition: 'transform 0.2s ease-in-out',
+                '&:hover': {
+                  transform: 'scale(1.1)',
+                  cursor: 'pointer'
+                }
               }}
             />
           </ListItem>
         ))}
       </List>
-      <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 1.5,
+        px: 1
+      }}>
         <select 
           onChange={(e) => setColors(presets[e.target.value])} 
           style={{ 
-            width: '90%', 
-            padding: '0.6em 1.2em',
+            width: '100%', 
+            padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid transparent',
-            fontSize: '1em',
+            border: '1px solid rgba(0, 0, 0, 0.12)',
+            fontSize: '0.9em',
             fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#e0e0e0',
+            backgroundColor: '#f8f9fa',
             cursor: 'pointer',
-            color: '#000000',
-            transition: 'border-color 0.25s',
+            color: '#2c2c2c',
+            transition: 'all 0.2s ease-in-out',
+            outline: 'none',
             textAlign: 'center'
           }}
         >
@@ -191,17 +238,21 @@ function App() {
         <button 
           onClick={handleRandomizeColors} 
           style={{ 
-            width: '90%',
-            padding: '0.6em 1.2em',
+            width: '100%',
+            padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid transparent',
-            fontSize: '1em',
+            border: '1px solid rgba(0, 0, 0, 0.12)',
+            fontSize: '0.9em',
             fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#e0e0e0',
+            backgroundColor: '#f8f9fa',
             cursor: 'pointer',
-            color: '#000000',
-            transition: 'border-color 0.25s'
+            color: '#2c2c2c',
+            transition: 'all 0.2s ease-in-out',
+            '&:hover': {
+              backgroundColor: '#f1f3f5',
+              transform: 'translateY(-1px)'
+            }
           }}
         >
           Randomize Colors

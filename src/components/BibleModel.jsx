@@ -97,7 +97,7 @@ const BibleModel = ({ colors }) => {
         </Box>
 
         {/* Ribbon 1 */}
-        <Box args={[0.3, 2, 0.01]} position={[-0.4, -2.1, 0]} castShadow receiveShadow>
+        <Box args={[0.3, 2, 0.01]} position={[-0.4, -2.1, 0.1]} castShadow receiveShadow>
           <meshPhysicalMaterial
             color={colors['ribbon-1']}
             roughness={0.5}
@@ -119,7 +119,7 @@ const BibleModel = ({ colors }) => {
         </Box>
 
         {/* Ribbon 3 */}
-        <Box args={[0.3, 2, 0.01]} position={[0.4, -2.1, 0]} castShadow receiveShadow>
+        <Box args={[0.3, 2, 0.01]} position={[0.4, -2.1, -0.1]} castShadow receiveShadow>
           <meshPhysicalMaterial
             color={colors['ribbon-3']}
             roughness={0.5}

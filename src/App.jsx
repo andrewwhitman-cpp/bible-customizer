@@ -211,7 +211,7 @@ function App() {
   );
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ height: '100vh', display: 'flex' }}>
+    <Container maxWidth={false} disableGutters sx={{ height: '100vh', display: 'flex', color: '#000000' }}>
       {isMobile && (
         <IconButton
           color="inherit"

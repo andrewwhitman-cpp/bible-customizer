@@ -11,8 +11,12 @@ import {
   Typography,
   Divider,
   Collapse,
-  Dialog
+  Dialog,
+  Drawer,
+  useTheme,
+  useMediaQuery
 } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 import {
   MenuBook,
   Book,
@@ -79,6 +83,9 @@ const presets = {
 };
 
 function App() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [drawerOpen, setDrawerOpen] = useState(!isMobile);
   const [selectedComponent, setSelectedComponent] = useState('outer-leather')
   const [expandedComponent, setExpandedComponent] = useState('')
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
@@ -125,85 +132,133 @@ function App() {
     { name: 'Ribbon 3', icon: <Bookmark />, id: 'ribbon-3' }
   ]
 
+  const SidebarContent = () => (
+    <Box sx={{ width: { xs: 250, sm: 180 }, p: 1 }}>
+      <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem' }}>
+        Customization
+      </Typography>
+      <List>
+        {components.map((component) => (
+          <ListItem
+            key={component.id}
+            button
+            dense
+            onClick={() => handleColorClick(component.id)}
+            sx={{ py: 0.5 }}
+          >
+            <ListItemIcon sx={{ minWidth: 32 }}>{component.icon}</ListItemIcon>
+            <ListItemText 
+              primary={component.name} 
+              sx={{ '& .MuiTypography-root': { fontSize: '0.9rem' } }} 
+            />
+            <Box
+              sx={{
+                width: 24,
+                height: 24,
+                borderRadius: '50%',
+                backgroundColor: colors[component.id],
+                ml: 1,
+                border: '1px solid rgba(0, 0, 0, 0.12)'
+              }}
+            />
+          </ListItem>
+        ))}
+      </List>
+      <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+        <select 
+          onChange={(e) => setColors(presets[e.target.value])} 
+          style={{ 
+            width: '90%', 
+            padding: '0.6em 1.2em',
+            borderRadius: '8px',
+            border: '1px solid transparent',
+            fontSize: '1em',
+            fontWeight: '500',
+            fontFamily: 'inherit',
+            backgroundColor: '#e0e0e0',
+            cursor: 'pointer',
+            color: '#000000',
+            transition: 'border-color 0.25s'
+          }}
+        >
+          <option value="" disabled selected>Presets</option>
+          <option value="classic">Classic</option>
+          <option value="simple">Simple</option>
+          <option value="rustic">Rustic</option>
+          <option value="ornate">Ornate</option>
+        </select>
+        <button 
+          onClick={handleRandomizeColors} 
+          style={{ 
+            width: '90%',
+            padding: '0.6em 1.2em',
+            borderRadius: '8px',
+            border: '1px solid transparent',
+            fontSize: '1em',
+            fontWeight: '500',
+            fontFamily: 'inherit',
+            backgroundColor: '#e0e0e0',
+            cursor: 'pointer',
+            color: '#000000',
+            transition: 'border-color 0.25s'
+          }}
+        >
+          Randomize Colors
+        </button>
+      </Box>
+    </Box>
+  );
+
   return (
     <Container maxWidth={false} disableGutters sx={{ height: '100vh', display: 'flex' }}>
-      <Paper elevation={3} sx={{ width: 180, p: 1, borderRadius: 0, borderRight: 1, borderColor: 'divider' }}>
-        <Typography variant="h6" sx={{ mb: 1, fontSize: '1rem' }}>
-          Customization
-        </Typography>
-        <List>
-          {components.map((component) => (
-            <ListItem
-              key={component.id}
-              button
-              dense
-              onClick={() => handleColorClick(component.id)}
-              sx={{ py: 0.5 }}
-            >
-              <ListItemIcon sx={{ minWidth: 32 }}>{component.icon}</ListItemIcon>
-              <ListItemText 
-                primary={component.name} 
-                sx={{ '& .MuiTypography-root': { fontSize: '0.9rem' } }} 
-              />
-              <Box
-                sx={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: '50%',
-                  backgroundColor: colors[component.id],
-                  ml: 1,
-                  border: '1px solid rgba(0, 0, 0, 0.12)'
-                }}
-              />
-            </ListItem>
-          ))}
-        </List>
-        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-          <select 
-            onChange={(e) => setColors(presets[e.target.value])} 
-            style={{ 
-              width: '90%', 
-              padding: '0.6em 1.2em',
-              borderRadius: '8px',
-              border: '1px solid transparent',
-              fontSize: '1em',
-              fontWeight: '500',
-              fontFamily: 'inherit',
-              backgroundColor: '#e0e0e0',
-              cursor: 'pointer',
-              color: '#000000',
-              transition: 'border-color 0.25s'
-            }}
-          >
-            <option value="" disabled selected>Presets</option>
-            <option value="classic">Classic</option>
-            <option value="simple">Simple</option>
-            <option value="rustic">Rustic</option>
-            <option value="ornate">Ornate</option>
-          </select>
-          <button 
-            onClick={handleRandomizeColors} 
-            style={{ 
-              width: '90%',
-              padding: '0.6em 1.2em',
-              borderRadius: '8px',
-              border: '1px solid transparent',
-              fontSize: '1em',
-              fontWeight: '500',
-              fontFamily: 'inherit',
-              backgroundColor: '#e0e0e0',
-              cursor: 'pointer',
-              color: '#000000',
-              transition: 'border-color 0.25s'
-            }}
-          >
-            Randomize Colors
-          </button>
-        </Box>
-      </Paper>
+      {isMobile && (
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={() => setDrawerOpen(!drawerOpen)}
+          sx={{ position: 'absolute', top: 8, left: 8, zIndex: 1 }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
+      {isMobile ? (
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          ModalProps={{ keepMounted: true }}
+        >
+          <SidebarContent />
+        </Drawer>
+      ) : (
+        <Paper elevation={3} sx={{ 
+          width: 180, 
+          borderRadius: 0, 
+          borderRight: 1, 
+          borderColor: 'divider',
+          display: drawerOpen ? 'block' : 'none'
+        }}>
+          <SidebarContent />
+        </Paper>
+      )}
 
-      <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', p: 2 }}>
-        <Box sx={{ width: '100%', height: '100%', maxWidth: 900, maxHeight: 900 }}>
+      <Box sx={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        p: { xs: 1, sm: 2 },
+        ml: { xs: 0, sm: drawerOpen ? '180px' : 0 }
+      }}>
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          maxWidth: { xs: '100%', sm: 900 },
+          maxHeight: { xs: '100%', sm: 900 }
+        }}>
           <BibleModel colors={colors} />
         </Box>
       </Box>

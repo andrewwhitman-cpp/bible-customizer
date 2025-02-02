@@ -211,7 +211,7 @@ function App() {
   );
 
   return (
-    <Container maxWidth={false} disableGutters sx={{ height: '100vh', display: 'flex', color: '#000000' }}>
+    <Container maxWidth={false} disableGutters sx={{ height: '100vh', width: '100vw', display: 'flex', color: '#000000', overflow: 'hidden' }}>
       {isMobile && (
         <IconButton
           color="inherit"
@@ -239,7 +239,12 @@ function App() {
           borderRadius: 0, 
           borderRight: 1, 
           borderColor: 'divider',
-          display: drawerOpen ? 'block' : 'none'
+          display: drawerOpen ? 'block' : 'none',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          zIndex: 1200
         }}>
           <SidebarContent />
         </Paper>
@@ -251,14 +256,16 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        p: { xs: 1, sm: 2 },
-        ml: { xs: 0, sm: drawerOpen ? '180px' : 0 }
+        width: '100%',
+        p: { xs: 0, sm: 1 },
+        ml: { xs: 0, sm: drawerOpen ? '180px' : 0 },
+        transition: 'margin-left 0.3s ease-in-out'
       }}>
         <Box sx={{
           width: '100%',
           height: '100%',
-          maxWidth: { xs: '100%', sm: 900 },
-          maxHeight: { xs: '100%', sm: 900 }
+          maxWidth: '100%',
+          maxHeight: '100%'
         }}>
           <BibleModel colors={colors} />
         </Box>

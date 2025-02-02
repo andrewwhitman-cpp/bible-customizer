@@ -196,21 +196,6 @@ function App() {
                 } 
               }} 
             />
-            <Box
-              sx={{
-                width: 28,
-                height: 28,
-                borderRadius: '50%',
-                backgroundColor: colors[component.id],
-                ml: 1,
-                border: '1px solid rgba(0, 0, 0, 0.08)',
-                transition: 'transform 0.2s ease-in-out',
-                '&:hover': {
-                  transform: 'scale(1.1)',
-                  cursor: 'pointer'
-                }
-              }}
-            />
           </ListItem>
         ))}
       </List>

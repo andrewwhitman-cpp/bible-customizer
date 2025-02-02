@@ -103,7 +103,7 @@ const BibleModel = ({ colors }) => {
         </group>
       </Stage>
       <OrbitControls
-        enablePan={false}
+        enablePan={true}
         enableZoom={true}
         minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI - Math.PI / 4}

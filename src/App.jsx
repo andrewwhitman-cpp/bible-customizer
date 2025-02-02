@@ -136,19 +136,21 @@ function App() {
     <Box sx={{ 
       width: { xs: 250, sm: 180 }, 
       p: 2,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#f5f5f5',
       height: '100%',
-      borderRight: '1px solid rgba(0, 0, 0, 0.08)'
+      borderRight: '1px solid rgba(0, 0, 0, 0.15)',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
     }}>
       <Typography 
         variant="h6" 
         sx={{ 
-          mb: 2, 
-          fontSize: '1.1rem',
-          fontWeight: 600,
+          mb: 3, 
+          fontSize: '1.2rem',
+          fontWeight: 700,
           color: '#1a1a1a',
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          letterSpacing: '0.5px'
         }}
       >
         Customization
@@ -161,13 +163,15 @@ function App() {
             dense
             onClick={() => handleColorClick(component.id)}
             sx={{
-              py: 1,
-              borderRadius: 1,
-              mb: 0.5,
+              py: 1.2,
+              borderRadius: 1.5,
+              mb: 1,
+              backgroundColor: 'rgba(255, 255, 255, 0.7)',
               transition: 'all 0.2s ease-in-out',
               '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                transform: 'translateX(4px)'
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                transform: 'translateX(4px)',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
               }
             }}
           >
@@ -185,9 +189,10 @@ function App() {
               primary={component.name} 
               sx={{ 
                 '& .MuiTypography-root': { 
-                  fontSize: '0.9rem',
-                  fontWeight: 500,
-                  color: '#2c2c2c'
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                  color: '#333333',
+                  letterSpacing: '0.3px'
                 } 
               }} 
             />
@@ -221,16 +226,17 @@ function App() {
             width: '100%', 
             padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid rgba(0, 0, 0, 0.12)',
+            border: '1px solid rgba(0, 0, 0, 0.2)',
             fontSize: '0.9em',
-            fontWeight: '500',
+            fontWeight: '600',
             fontFamily: 'inherit',
-            backgroundColor: '#f8f9fa',
+            backgroundColor: '#ffffff',
             cursor: 'pointer',
-            color: '#2c2c2c',
+            color: '#1a1a1a',
             transition: 'all 0.2s ease-in-out',
             outline: 'none',
-            textAlign: 'center'
+            textAlign: 'center',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
           }}
         >
           <option value="" disabled selected>Presets</option>
@@ -245,17 +251,19 @@ function App() {
             width: '100%',
             padding: '0.8em 1em',
             borderRadius: '8px',
-            border: '1px solid rgba(0, 0, 0, 0.12)',
+            border: '1px solid rgba(0, 0, 0, 0.15)',
             fontSize: '0.9em',
             fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#f8f9fa',
+            backgroundColor: '#4a90e2',
             cursor: 'pointer',
-            color: '#2c2c2c',
+            color: '#ffffff',
             transition: 'all 0.2s ease-in-out',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
             '&:hover': {
-              backgroundColor: '#f1f3f5',
-              transform: 'translateY(-1px)'
+              backgroundColor: '#d4d4d4',
+              transform: 'translateY(-1px)',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
             }
           }}
         >
@@ -329,7 +337,11 @@ function App() {
         open={colorPickerOpen}
         onClose={() => setColorPickerOpen(false)}
         PaperProps={{
-          sx: { p: 2 }
+          sx: { 
+            p: 3,
+            borderRadius: 2,
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)'
+          }
         }}
       >
         <ChromePicker

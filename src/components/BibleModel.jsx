@@ -8,7 +8,7 @@ const BibleModel = ({ colors }) => {
   const bibleRef = useRef();
 
   return (
-    <Canvas shadows dpr={[1, 2]} camera={{ position: [4, 2, 4], fov: 50 }} style={{ background: '#f8f8f8', width: '100%', height: '100%' }}>
+    <Canvas shadows dpr={[1, 2]} camera={{ position: [4, 2, 4], fov: 50 }} style={{ background: '#c0c0c0', width: '100%', height: '100%' }}>
       <Environment preset="city" />
       <ambientLight intensity={0.5} />
       <directionalLight

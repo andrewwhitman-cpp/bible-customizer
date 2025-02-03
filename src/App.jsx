@@ -28,6 +28,7 @@ import {
 } from '@mui/icons-material'
 import { ChromePicker } from 'react-color'
 import BibleModel from './components/BibleModel';
+import OpenBibleModel from './components/OpenBibleModel';
 
 function getContrastTextColor(hexColor) {
   // Convert hex to RGB
@@ -120,6 +121,7 @@ function App() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [drawerOpen, setDrawerOpen] = useState(!isMobile);
   const [isExploded, setIsExploded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [yapSize, setYapSize] = useState('standard');
   const [selectedComponent, setSelectedComponent] = useState('outer-leather')
   const [expandedComponent, setExpandedComponent] = useState('')
@@ -190,23 +192,40 @@ function App() {
       >
         Customization
       </Typography>
-      <Button
-        variant="contained"
-        fullWidth
-        onClick={() => setIsExploded(!isExploded)}
-        sx={{
-          mb: 2,
-          backgroundColor: isExploded ? '#e74c3c' : '#4a90e2',
-          color: '#ffffff',
-          textTransform: 'none',
-          fontWeight: 600,
-          '&:hover': {
-            backgroundColor: isExploded ? '#c0392b' : '#357abd'
-          }
-        }}
-      >
-        {isExploded ? 'Unexplode' : 'Explode'}
-      </Button>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => setIsExploded(!isExploded)}
+          sx={{
+            backgroundColor: isExploded ? '#e74c3c' : '#4a90e2',
+            color: '#ffffff',
+            textTransform: 'none',
+            fontWeight: 600,
+            '&:hover': {
+              backgroundColor: isExploded ? '#c0392b' : '#357abd'
+            }
+          }}
+        >
+          {isExploded ? 'Unexplode' : 'Explode'}
+        </Button>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => setIsOpen(!isOpen)}
+          sx={{
+            backgroundColor: isOpen ? '#e74c3c' : '#4a90e2',
+            color: '#ffffff',
+            textTransform: 'none',
+            fontWeight: 600,
+            '&:hover': {
+              backgroundColor: isOpen ? '#c0392b' : '#357abd'
+            }
+          }}
+        >
+          {isOpen ? 'Close' : 'Open'}
+        </Button>
+      </Box>
       <List sx={{ mb: 3 }}>
         {components.map((component) => (
           <ListItem
@@ -396,7 +415,10 @@ function App() {
           maxWidth: '100%',
           maxHeight: '100%'
         }}>
-          <BibleModel colors={colors} yapSize={yapSize} isExploded={isExploded} />
+          {isOpen ? 
+            <OpenBibleModel colors={colors} yapSize={yapSize} /> :
+            <BibleModel colors={colors} yapSize={yapSize} isExploded={isExploded} />
+          }
         </Box>
       </Box>
       <Dialog

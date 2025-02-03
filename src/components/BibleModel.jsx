@@ -4,7 +4,13 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, AccumulativeShadows, RandomizedLight, Environment } from '@react-three/drei';
 import { Box } from '@react-three/drei';
 
-const BibleModel = ({ colors }) => {
+const BibleModel = ({ colors, yapSize = 'standard' }) => {
+  const yapSizeMap = {
+    'standard': 0,
+    'half': 0.2,
+    'full': 0.4
+  };
+  const yapValue = yapSizeMap[yapSize] || 0;
   const bibleRef = useRef();
 
   return (
@@ -31,7 +37,29 @@ const BibleModel = ({ colors }) => {
         </Box>
 
         {/* Leather cover outer - spine panel */}
-        <Box args={[0.1, 3.6, 0.8]} position={[-1.15, 0, 0]} castShadow receiveShadow>
+        <Box args={[0.1, 3.4 + yapValue, 0.8]} position={[-1.15, 0, 0]} castShadow receiveShadow>
+          <meshPhysicalMaterial 
+            color={colors['outer-leather']} 
+            roughness={0.7} 
+            metalness={0.1}
+            clearcoat={0.1}
+            clearcoatRoughness={0.8}
+          />
+        </Box>
+
+        {/* Leather cover outer - front panel */}
+        <Box args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} position={[0 + yapValue * 0.25, 0, 0.45]} castShadow receiveShadow>
+          <meshPhysicalMaterial 
+            color={colors['outer-leather']} 
+            roughness={0.7} 
+            metalness={0.1}
+            clearcoat={0.1}
+            clearcoatRoughness={0.8}
+          />
+        </Box>
+
+        {/* Leather cover outer - back panel */}
+        <Box args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} position={[0 + yapValue * 0.25, 0, -0.45]} castShadow receiveShadow>
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -42,29 +70,18 @@ const BibleModel = ({ colors }) => {
         </Box>
 
         {/* Leather cover inner - spine panel */}
-        <Box args={[0.025, 3.5, 0.8]} position={[-1.1, 0, 0]} castShadow receiveShadow>
+        <Box args={[0.025, 3.3, 0.8]} position={[-1.1, 0, 0]} castShadow receiveShadow>
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
             metalness={0.1}
             clearcoat={0.2}
             clearcoatRoughness={0.6}
-          />
-        </Box>
-
-        {/* Leather cover outer - front panel */}
-        <Box args={[2.6, 3.6, 0.1]} position={[0.1, 0, 0.45]} castShadow receiveShadow>
-          <meshPhysicalMaterial 
-            color={colors['outer-leather']} 
-            roughness={0.7} 
-            metalness={0.1}
-            clearcoat={0.1}
-            clearcoatRoughness={0.8}
           />
         </Box>
 
         {/* Leather cover inner - front panel */}
-        <Box args={[2.5, 3.5, 0.025]} position={[0.1, 0, 0.4]} castShadow receiveShadow>
+        <Box args={[2.25, 3.3, 0.025]} position={[0.02, 0, 0.4]} castShadow receiveShadow>
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
@@ -74,19 +91,8 @@ const BibleModel = ({ colors }) => {
           />
         </Box>
 
-        {/* Leather cover outer - back panel */}
-        <Box args={[2.6, 3.6, 0.1]} position={[0.1, 0, -0.45]} castShadow receiveShadow>
-          <meshPhysicalMaterial 
-            color={colors['outer-leather']} 
-            roughness={0.7} 
-            metalness={0.1}
-            clearcoat={0.1}
-            clearcoatRoughness={0.8}
-          />
-        </Box>
-
         {/* Leather cover inner - back panel */}
-        <Box args={[2.5, 3.5, 0.025]} position={[0.1, 0, -0.4]} castShadow receiveShadow>
+        <Box args={[2.25, 3.3, 0.025]} position={[0.02, 0, -0.4]} castShadow receiveShadow>
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 

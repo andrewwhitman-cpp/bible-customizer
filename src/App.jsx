@@ -118,6 +118,7 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [drawerOpen, setDrawerOpen] = useState(!isMobile);
+  const [yapSize, setYapSize] = useState('standard');
   const [selectedComponent, setSelectedComponent] = useState('outer-leather')
   const [expandedComponent, setExpandedComponent] = useState('')
   const [colorPickerOpen, setColorPickerOpen] = useState(false)
@@ -238,6 +239,31 @@ function App() {
         px: 1
       }}>
         <select 
+          value={yapSize}
+          onChange={(e) => setYapSize(e.target.value)}
+          style={{ 
+            width: '100%', 
+            padding: '0.8em 1em',
+            borderRadius: '8px',
+            border: '1px solid rgba(0, 0, 0, 0.2)',
+            fontSize: '0.9em',
+            fontWeight: '600',
+            fontFamily: 'inherit',
+            backgroundColor: '#ffffff',
+            cursor: 'pointer',
+            color: '#1a1a1a',
+            transition: 'all 0.2s ease-in-out',
+            outline: 'none',
+            textAlign: 'center',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+          }}
+        >
+          <option value="standard">Standard Yap</option>
+          <option value="half">Half Yap</option>
+          <option value="full">Full Yap</option>
+        </select>
+
+        <select 
           onChange={(e) => setColors(presets[e.target.value])} 
           style={{ 
             width: '100%', 
@@ -351,7 +377,7 @@ function App() {
           maxWidth: '100%',
           maxHeight: '100%'
         }}>
-          <BibleModel colors={colors} />
+          <BibleModel colors={colors} yapSize={yapSize} />
         </Box>
       </Box>
       <Dialog

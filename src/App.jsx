@@ -49,37 +49,69 @@ function getRandomColor() {
 
 const presets = {
   classic: {
-    'outer-leather': '#513520',
-    'inner-leather': '#8B4513',
-    'guilding': '#ffd700',
-    'ribbon-1': '#513520',
-    'ribbon-2': '#513520',
-    'ribbon-3': '#513520'
+    'outer-leather': '#3B2417', // Deep rich brown for outer leather
+    'inner-leather': '#8B6B4E', // Warm tan for inner leather
+    'guilding': '#D4AF37', // Antique gold for guilding
+    'ribbon-1': '#800000', // Deep maroon for first ribbon
+    'ribbon-2': '#2B4B3C', // Forest green for second ribbon
+    'ribbon-3': '#1B365D' // Navy blue for third ribbon
   },
-  simple: {
-    'outer-leather': '#222222',
-    'inner-leather': '#A9A9A9',
-    'guilding': '#C0C0C0',
-    'ribbon-1': '#DAA520',
-    'ribbon-2': '#C0C0C0',
-    'ribbon-3': '#B87333'
+  contemporary: {
+    'outer-leather': '#37474F', // Blue gray for modern outer leather
+    'inner-leather': '#FAFAFA', // Snow white for minimalist inner leather
+    'guilding': '#90A4AE', // Light blue gray for subtle metallic finish
+    'ribbon-1': '#FF5722', // Deep orange for bold first ribbon
+    'ribbon-2': '#009688', // Teal for trendy second ribbon
+    'ribbon-3': '#673AB7' // Deep purple for stylish third ribbon
   },
-  rustic: {
-    'outer-leather': '#8B4513',
-    'inner-leather': '#DEB887',
-    'guilding': '#CD853F',
-    'ribbon-1': '#556B2F',
-    'ribbon-2': '#8B7355',
-    'ribbon-3': '#A0522D'
+  elegant: {
+    'outer-leather': '#1A1A1A', // Rich black for sophisticated outer leather
+    'inner-leather': '#F5F5F5', // White smoke for refined inner leather
+    'guilding': '#D4AF37', // Metallic gold for elegant accents
+    'ribbon-1': '#800080', // Purple for luxurious first ribbon
+    'ribbon-2': '#4B0082', // Indigo for deep second ribbon
+    'ribbon-3': '#483D8B' // Dark slate blue for refined third ribbon
+  },
+  modern: {
+    'outer-leather': '#2C3E50', // Midnight blue for contemporary outer leather
+    'inner-leather': '#ECF0F1', // Cloud white for clean inner leather
+    'guilding': '#BDC3C7', // Silver gray for modern metallic finish
+    'ribbon-1': '#E74C3C', // Bright red for vibrant first ribbon
+    'ribbon-2': '#3498DB', // Bright blue for fresh second ribbon
+    'ribbon-3': '#2ECC71' // Emerald green for bold third ribbon
   },
   ornate: {
-    'outer-leather': '#563159',
-    'inner-leather': '#FFFFF0',
-    'guilding': '#DAA520',
-    'ribbon-1': '#DC143C',
-    'ribbon-2': '#4169E1',
-    'ribbon-3': '#8B008B'
-  }
+    'outer-leather': '#563159', // Royal purple for luxurious outer leather
+    'inner-leather': '#FFFFF0', // Ivory for elegant inner leather
+    'guilding': '#DAA520', // Goldenrod for ornate metallic details
+    'ribbon-1': '#DC143C', // Crimson for bold first ribbon
+    'ribbon-2': '#4169E1', // Royal blue for regal second ribbon
+    'ribbon-3': '#8B008B' // Dark magenta for rich third ribbon
+  },
+  rustic: {
+    'outer-leather': '#8B4513', // Saddle brown for weathered leather look
+    'inner-leather': '#DEB887', // Burlywood for aged inner leather
+    'guilding': '#CD853F', // Peru brown for rustic metallic accents
+    'ribbon-1': '#556B2F', // Dark olive green for earthy first ribbon
+    'ribbon-2': '#8B7355', // Light brown for natural second ribbon
+    'ribbon-3': '#A0522D' // Sienna for warm third ribbon
+  },
+  traditional: {
+    'outer-leather': '#582F0E', // Deep brown for traditional outer leather
+    'inner-leather': '#C4A484', // Tan for classic inner leather
+    'guilding': '#996515', // Bronze for traditional metalwork
+    'ribbon-1': '#006400', // Dark green for traditional first ribbon
+    'ribbon-2': '#8B0000', // Dark red for classic second ribbon
+    'ribbon-3': '#000080' // Navy blue for traditional third ribbon
+  },
+  vintage: {
+    'outer-leather': '#654321', // Dark brown for aged leather
+    'inner-leather': '#E8DCC4', // Light beige for faded inner leather
+    'guilding': '#B8860B', // Dark goldenrod for antique metalwork
+    'ribbon-1': '#800020', // Burgundy for classic first ribbon
+    'ribbon-2': '#2F4F4F', // Dark slate gray for muted second ribbon
+    'ribbon-3': '#4A412A' // Dark olive for aged third ribbon
+  },
 };
 
 function App() {
@@ -226,9 +258,13 @@ function App() {
         >
           <option value="" disabled selected>Presets</option>
           <option value="classic">Classic</option>
-          <option value="simple">Simple</option>
-          <option value="rustic">Rustic</option>
+          <option value="contemporary">Contemporary</option>
+          <option value="elegant">Elegant</option>
+          <option value="modern">Modern</option>
           <option value="ornate">Ornate</option>
+          <option value="rustic">Rustic</option>
+          <option value="traditional">Traditional</option>
+          <option value="vintage">Vintage</option>
         </select>
         <button 
           onClick={handleRandomizeColors} 

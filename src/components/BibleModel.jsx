@@ -21,12 +21,12 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
   });
 
   const frontSpring = useSpring({
-    position: isExploded ? [0 + yapValue * 0.25, 0, 0.45 + 1] : [0 + yapValue * 0.25, 0, 0.45],
+    position: isExploded ? [0.025 + yapValue * 0.25, 0, 0.45 + 1] : [0.025 + yapValue * 0.25, 0, 0.45],
     config: { mass: 1, tension: 280, friction: 60 }
   });
 
   const backSpring = useSpring({
-    position: isExploded ? [0 + yapValue * 0.25, 0, -0.45 - 1] : [0 + yapValue * 0.25, 0, -0.45],
+    position: isExploded ? [0.025 + yapValue * 0.25, 0, -0.45 - 1] : [0.025 + yapValue * 0.25, 0, -0.45],
     config: { mass: 1, tension: 280, friction: 60 }
   });
 
@@ -85,7 +85,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover outer - spine panel */}
         <animated.mesh position={spineSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[0.1, 3.4 + yapValue, 0.8]} />
+          <boxGeometry args={[0.1, 3.45 + yapValue, 0.8]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -97,7 +97,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover outer - front panel */}
         <animated.mesh position={frontSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} />
+          <boxGeometry args={[2.45 + yapValue * 0.5, 3.45 + yapValue, 0.1]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -109,7 +109,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover outer - back panel */}
         <animated.mesh position={backSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} />
+          <boxGeometry args={[2.45 + yapValue * 0.5, 3.45 + yapValue, 0.1]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -121,7 +121,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover inner - spine panel */}
         <animated.mesh position={innerSpineSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[0.025, 3.3, 0.8]} />
+          <boxGeometry args={[0.025, 3.35, 0.8]} />
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
@@ -133,7 +133,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover inner - front panel */}
         <animated.mesh position={innerFrontSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[2.25, 3.3, 0.025]} />
+          <boxGeometry args={[2.3, 3.35, 0.025]} />
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
@@ -145,7 +145,7 @@ const BibleModel = ({ colors, yapSize = 'standard', isExploded = false }) => {
 
         {/* Leather cover inner - back panel */}
         <animated.mesh position={innerBackSpring.position} castShadow receiveShadow>
-          <boxGeometry args={[2.25, 3.3, 0.025]} />
+          <boxGeometry args={[2.3, 3.35, 0.025]} />
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 

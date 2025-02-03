@@ -190,7 +190,7 @@ function App() {
           letterSpacing: '0.3px'
         }}
       >
-        Customization
+        Bible Customization
       </Typography>
       <Box sx={{ display: 'flex', gap: 0.5, mb: 1.5 }}>
         <Button

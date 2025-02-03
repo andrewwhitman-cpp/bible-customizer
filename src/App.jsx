@@ -132,7 +132,7 @@ function App() {
     'inner-leather': '#d2b48c',
     'guilding': '#ffd700',
     'ribbon-1': '#2D5A3A',
-    'ribbon-2': '#8B4513',
+    'ribbon-2': '#d2b48c',
     'ribbon-3': '#1B4B82'
   })
 

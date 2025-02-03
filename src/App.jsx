@@ -14,7 +14,8 @@ import {
   Dialog,
   Drawer,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Button
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
@@ -118,6 +119,7 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [drawerOpen, setDrawerOpen] = useState(!isMobile);
+  const [isExploded, setIsExploded] = useState(false);
   const [yapSize, setYapSize] = useState('standard');
   const [selectedComponent, setSelectedComponent] = useState('outer-leather')
   const [expandedComponent, setExpandedComponent] = useState('')
@@ -177,7 +179,7 @@ function App() {
       <Typography 
         variant="h6" 
         sx={{ 
-          mb: 3, 
+          mb: 2, 
           fontSize: '1.2rem',
           fontWeight: 700,
           color: '#1a1a1a',
@@ -188,6 +190,23 @@ function App() {
       >
         Customization
       </Typography>
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={() => setIsExploded(!isExploded)}
+        sx={{
+          mb: 2,
+          backgroundColor: isExploded ? '#e74c3c' : '#4a90e2',
+          color: '#ffffff',
+          textTransform: 'none',
+          fontWeight: 600,
+          '&:hover': {
+            backgroundColor: isExploded ? '#c0392b' : '#357abd'
+          }
+        }}
+      >
+        {isExploded ? 'Unexplode' : 'Explode'}
+      </Button>
       <List sx={{ mb: 3 }}>
         {components.map((component) => (
           <ListItem
@@ -377,7 +396,7 @@ function App() {
           maxWidth: '100%',
           maxHeight: '100%'
         }}>
-          <BibleModel colors={colors} yapSize={yapSize} />
+          <BibleModel colors={colors} yapSize={yapSize} isExploded={isExploded} />
         </Box>
       </Box>
       <Dialog

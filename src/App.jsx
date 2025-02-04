@@ -17,6 +17,8 @@ import {
   useMediaQuery,
   Button
 } from '@mui/material'
+import LockIcon from '@mui/icons-material/Lock'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
   MenuBook,
@@ -136,12 +138,23 @@ function App() {
     'ribbon-3': '#1B4B82'
   })
 
+  const [lockedColors, setLockedColors] = useState({})
+
   const handleRandomizeColors = () => {
-    const newColors = {};
+    const newColors = { ...colors };
     Object.keys(colors).forEach(key => {
-      newColors[key] = getRandomColor();
+      if (!lockedColors[key]) {
+        newColors[key] = getRandomColor();
+      }
     });
     setColors(newColors);
+  };
+
+  const handleToggleLock = (componentId) => {
+    setLockedColors(prev => ({
+      ...prev,
+      [componentId]: !prev[componentId]
+    }));
   };
 
   const handleColorChange = (color) => {
@@ -253,28 +266,45 @@ function App() {
               }
             }}
           >
-            <ListItemIcon sx={{ 
-              minWidth: 32,
-              color: colors[component.id],
-              '& svg': {
-                fontSize: '1.2rem',
-                stroke: 'rgba(0, 0, 0, 0.1)',
-                strokeWidth: '0.5px'
-              }
-            }}>
-              {component.icon}
-            </ListItemIcon>
-            <ListItemText 
-              primary={component.name} 
-              sx={{ 
-                '& .MuiTypography-root': { 
-                  fontSize: '0.85rem',
-                  fontWeight: 500,
-                  color: '#475569',
-                  letterSpacing: '0.2px'
-                } 
-              }} 
-            />
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <ListItemIcon sx={{ 
+                minWidth: 32,
+                color: colors[component.id],
+                '& svg': {
+                  fontSize: '1.2rem',
+                  stroke: 'rgba(0, 0, 0, 0.1)',
+                  strokeWidth: '0.5px'
+                }
+              }}>
+                {component.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={component.name} 
+                sx={{ 
+                  '& .MuiTypography-root': { 
+                    fontSize: '0.85rem',
+                    fontWeight: 500,
+                    color: '#475569',
+                    letterSpacing: '0.2px'
+                  } 
+                }} 
+              />
+              <IconButton
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleLock(component.id);
+                }}
+                sx={{
+                  color: lockedColors[component.id] ? '#e74c3c' : '#64748b',
+                  '&:hover': {
+                    color: lockedColors[component.id] ? '#c0392b' : '#475569'
+                  }
+                }}
+              >
+                {lockedColors[component.id] ? <LockIcon fontSize="small" /> : <LockOpenIcon fontSize="small" />}
+              </IconButton>
+            </Box>
           </ListItem>
         ))}
       </List>

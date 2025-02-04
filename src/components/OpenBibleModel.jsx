@@ -88,7 +88,7 @@ const OpenBibleModel = ({ colors, yapSize = 'standard' }) => {
 
         {/* Leather cover outer - left panel */}
         <animated.mesh position={[-1.3 - yapValue * 0.2, 0, 0.15]} rotation={[0, -openAngle * 1.4, 0]} castShadow receiveShadow>
-          <boxGeometry args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} />
+          <boxGeometry args={[2.45 + yapValue * 0.5, 3.45 + yapValue, 0.1]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -100,7 +100,7 @@ const OpenBibleModel = ({ colors, yapSize = 'standard' }) => {
 
         {/* Leather cover outer - right panel */}
         <animated.mesh position={[1.3 + yapValue * 0.2, 0, 0.15]} rotation={[0, openAngle * 1.4, 0]} castShadow receiveShadow>
-          <boxGeometry args={[2.4 + yapValue * 0.5, 3.4 + yapValue, 0.1]} />
+          <boxGeometry args={[2.45 + yapValue * 0.5, 3.45 + yapValue, 0.1]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 
@@ -112,7 +112,7 @@ const OpenBibleModel = ({ colors, yapSize = 'standard' }) => {
 
         {/* Leather cover inner - left panel */}
         <animated.mesh position={[-1.3, 0, 0.2]} rotation={[0, -openAngle * 1.4, 0]} castShadow receiveShadow>
-          <boxGeometry args={[2.25, 3.3, 0.025]} />
+          <boxGeometry args={[2.3, 3.35, 0.025]} />
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
@@ -124,7 +124,7 @@ const OpenBibleModel = ({ colors, yapSize = 'standard' }) => {
 
         {/* Leather cover inner - right panel */}
         <animated.mesh position={[1.3, 0, 0.2]} rotation={[0, openAngle * 1.4, 0]} castShadow receiveShadow>
-          <boxGeometry args={[2.25, 3.3, 0.025]} />
+          <boxGeometry args={[2.3, 3.35, 0.025]} />
           <meshPhysicalMaterial 
             color={colors['inner-leather']} 
             roughness={0.6} 
@@ -136,7 +136,7 @@ const OpenBibleModel = ({ colors, yapSize = 'standard' }) => {
 
         {/* Spine (curved when open) */}
         <mesh position={[0, 0, 0]} rotation={[0, 0, 0]} castShadow receiveShadow>
-          <cylinderGeometry args={[0.2, 0.2, 3.4 + yapValue, 32, 1, true, openAngle, openAngle]} />
+          <cylinderGeometry args={[0.2, 0.2, 3.45 + yapValue, 32, 1, true, openAngle, openAngle]} />
           <meshPhysicalMaterial 
             color={colors['outer-leather']} 
             roughness={0.7} 

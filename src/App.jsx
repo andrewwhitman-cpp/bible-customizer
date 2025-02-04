@@ -17,6 +17,8 @@ import {
   useMediaQuery,
   Button
 } from '@mui/material'
+import LockIcon from '@mui/icons-material/Lock'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
 import MenuIcon from '@mui/icons-material/Menu'
 import {
   MenuBook,
@@ -132,16 +134,27 @@ function App() {
     'inner-leather': '#d2b48c',
     'guilding': '#ffd700',
     'ribbon-1': '#2D5A3A',
-    'ribbon-2': '#8B4513',
+    'ribbon-2': '#d2b48c',
     'ribbon-3': '#1B4B82'
   })
 
+  const [lockedColors, setLockedColors] = useState({})
+
   const handleRandomizeColors = () => {
-    const newColors = {};
+    const newColors = { ...colors };
     Object.keys(colors).forEach(key => {
-      newColors[key] = getRandomColor();
+      if (!lockedColors[key]) {
+        newColors[key] = getRandomColor();
+      }
     });
     setColors(newColors);
+  };
+
+  const handleToggleLock = (componentId) => {
+    setLockedColors(prev => ({
+      ...prev,
+      [componentId]: !prev[componentId]
+    }));
   };
 
   const handleColorChange = (color) => {
@@ -171,62 +184,70 @@ function App() {
 
   const SidebarContent = () => (
     <Box sx={{ 
-      width: { xs: 250, sm: 180 }, 
-      p: 2,
-      backgroundColor: '#f5f5f5',
+      width: { xs: 220, sm: 160 }, 
+      p: 1.5,
+      backgroundColor: '#ffffff',
       height: '100%',
-      borderRight: '1px solid rgba(0, 0, 0, 0.15)',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+      borderRight: '1px solid rgba(0, 0, 0, 0.08)',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.03)'
     }}>
       <Typography 
         variant="h6" 
         sx={{ 
-          mb: 2, 
-          fontSize: '1.2rem',
-          fontWeight: 700,
-          color: '#1a1a1a',
-          textAlign: 'center',
+          mb: 1.5, 
+          fontSize: '1rem',
+          fontWeight: 600,
+          color: '#2c3e50',
+          textAlign: 'left',
           width: '100%',
-          letterSpacing: '0.5px'
+          letterSpacing: '0.3px'
         }}
       >
-        Customization
+        Bible Customization
       </Typography>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+      <Box sx={{ display: 'flex', gap: 0.5, mb: 1.5 }}>
         <Button
-          variant="contained"
+          variant="outlined"
           fullWidth
+          size="small"
           onClick={() => setIsExploded(!isExploded)}
           sx={{
-            backgroundColor: isExploded ? '#e74c3c' : '#4a90e2',
-            color: '#ffffff',
+            borderColor: isExploded ? '#e74c3c' : '#64748b',
+            color: isExploded ? '#e74c3c' : '#64748b',
             textTransform: 'none',
-            fontWeight: 600,
+            fontWeight: 500,
+            fontSize: '0.8rem',
             '&:hover': {
-              backgroundColor: isExploded ? '#c0392b' : '#357abd'
+              borderColor: isExploded ? '#c0392b' : '#475569',
+              color: isExploded ? '#c0392b' : '#475569',
+              backgroundColor: 'rgba(0, 0, 0, 0.02)'
             }
           }}
         >
           {isExploded ? 'Unexplode' : 'Explode'}
         </Button>
         <Button
-          variant="contained"
+          variant="outlined"
           fullWidth
+          size="small"
           onClick={() => setIsOpen(!isOpen)}
           sx={{
-            backgroundColor: isOpen ? '#e74c3c' : '#4a90e2',
-            color: '#ffffff',
+            borderColor: isOpen ? '#e74c3c' : '#64748b',
+            color: isOpen ? '#e74c3c' : '#64748b',
             textTransform: 'none',
-            fontWeight: 600,
+            fontWeight: 500,
+            fontSize: '0.8rem',
             '&:hover': {
-              backgroundColor: isOpen ? '#c0392b' : '#357abd'
+              borderColor: isOpen ? '#c0392b' : '#475569',
+              color: isOpen ? '#c0392b' : '#475569',
+              backgroundColor: 'rgba(0, 0, 0, 0.02)'
             }
           }}
         >
           {isOpen ? 'Close' : 'Open'}
         </Button>
       </Box>
-      <List sx={{ mb: 3 }}>
+      <List sx={{ mb: 1.5 }}>
         {components.map((component) => (
           <ListItem
             key={component.id}
@@ -234,66 +255,81 @@ function App() {
             dense
             onClick={() => handleColorClick(component.id)}
             sx={{
-              py: 1.2,
-              borderRadius: 1.5,
-              mb: 1,
-              backgroundColor: 'rgba(255, 255, 255, 0.7)',
+              py: 0.8,
+              borderRadius: 1,
+              mb: 0.5,
+              backgroundColor: 'transparent',
               transition: 'all 0.2s ease-in-out',
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                transform: 'translateX(4px)',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                transform: 'translateX(2px)'
               }
             }}
           >
-            <ListItemIcon sx={{ 
-              minWidth: 36,
-              color: colors[component.id],
-              '& svg': {
-                stroke: 'rgba(0, 0, 0, 0.2)',
-                strokeWidth: '0.5px'
-              }
-            }}>
-              {component.icon}
-            </ListItemIcon>
-            <ListItemText 
-              primary={component.name} 
-              sx={{ 
-                '& .MuiTypography-root': { 
-                  fontSize: '0.95rem',
-                  fontWeight: 600,
-                  color: '#333333',
-                  letterSpacing: '0.3px'
-                } 
-              }} 
-            />
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+              <ListItemIcon sx={{ 
+                minWidth: 32,
+                color: colors[component.id],
+                '& svg': {
+                  fontSize: '1.2rem',
+                  stroke: 'rgba(0, 0, 0, 0.1)',
+                  strokeWidth: '0.5px'
+                }
+              }}>
+                {component.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={component.name} 
+                sx={{ 
+                  '& .MuiTypography-root': { 
+                    fontSize: '0.85rem',
+                    fontWeight: 500,
+                    color: '#475569',
+                    letterSpacing: '0.2px'
+                  } 
+                }} 
+              />
+              <IconButton
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleToggleLock(component.id);
+                }}
+                sx={{
+                  color: lockedColors[component.id] ? '#e74c3c' : '#64748b',
+                  '&:hover': {
+                    color: lockedColors[component.id] ? '#c0392b' : '#475569'
+                  }
+                }}
+              >
+                {lockedColors[component.id] ? <LockIcon fontSize="small" /> : <LockOpenIcon fontSize="small" />}
+              </IconButton>
+            </Box>
           </ListItem>
         ))}
       </List>
       <Box sx={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: 1.5,
-        px: 1
+        gap: 1,
+        px: 0.5
       }}>
         <select 
           value={yapSize}
           onChange={(e) => setYapSize(e.target.value)}
           style={{ 
             width: '100%', 
-            padding: '0.8em 1em',
-            borderRadius: '8px',
-            border: '1px solid rgba(0, 0, 0, 0.2)',
-            fontSize: '0.9em',
-            fontWeight: '600',
+            padding: '0.5em 0.8em',
+            borderRadius: '6px',
+            border: '1px solid rgba(0, 0, 0, 0.15)',
+            fontSize: '0.8em',
+            fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#f8fafc',
             cursor: 'pointer',
-            color: '#1a1a1a',
+            color: '#475569',
             transition: 'all 0.2s ease-in-out',
-            outline: 'none',
-            textAlign: 'center',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            outline: 'none'
           }}
         >
           <option value="standard">Standard Yap</option>
@@ -305,19 +341,17 @@ function App() {
           onChange={(e) => setColors(presets[e.target.value])} 
           style={{ 
             width: '100%', 
-            padding: '0.8em 1em',
-            borderRadius: '8px',
-            border: '1px solid rgba(0, 0, 0, 0.2)',
-            fontSize: '0.9em',
-            fontWeight: '600',
+            padding: '0.5em 0.8em',
+            borderRadius: '6px',
+            border: '1px solid rgba(0, 0, 0, 0.15)',
+            fontSize: '0.8em',
+            fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#f8fafc',
             cursor: 'pointer',
-            color: '#1a1a1a',
+            color: '#475569',
             transition: 'all 0.2s ease-in-out',
-            outline: 'none',
-            textAlign: 'center',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            outline: 'none'
           }}
         >
           <option value="" disabled selected>Presets</option>
@@ -334,22 +368,16 @@ function App() {
           onClick={handleRandomizeColors} 
           style={{ 
             width: '100%',
-            padding: '0.8em 1em',
-            borderRadius: '8px',
+            padding: '0.5em 0.8em',
+            borderRadius: '6px',
             border: '1px solid rgba(0, 0, 0, 0.15)',
-            fontSize: '0.9em',
+            fontSize: '0.8em',
             fontWeight: '500',
             fontFamily: 'inherit',
-            backgroundColor: '#4a90e2',
+            backgroundColor: '#f8fafc',
             cursor: 'pointer',
-            color: '#ffffff',
-            transition: 'all 0.2s ease-in-out',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-            '&:hover': {
-              backgroundColor: '#d4d4d4',
-              transform: 'translateY(-1px)',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-            }
+            color: '#475569',
+            transition: 'all 0.2s ease-in-out'
           }}
         >
           Randomize Colors
